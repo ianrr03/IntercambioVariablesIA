@@ -10,6 +10,8 @@ using Photon.Realtime;
 public class ControladorPuntos : MonoBehaviourPunCallbacks
 {
     public TMP_InputField VariableLocalInput; //Caja de texto de entrada
+    
+    //Referencia los textos de la escena
     public TMP_Text VariableLocalText;
     public TMP_Text VariableRedText;
 
@@ -24,7 +26,7 @@ public class ControladorPuntos : MonoBehaviourPunCallbacks
         string value = VariableLocalInput.text;
         VariableLocalText.text = value; //El jugador local cambia el valor, cambia su puntuacion
         //Ahora tendremos que avisar al otro jugador para que lo cambie
-        photonView.RPC(nameof(CambiarValorEnRed),RpcTarget.OthersBuffered, value);
+        photonView.RPC(nameof(CambiarValorEnRed), RpcTarget.OthersBuffered, value);
     }//Cambiar valor
 
     [PunRPC]
