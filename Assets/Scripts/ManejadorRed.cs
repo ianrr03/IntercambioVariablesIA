@@ -17,10 +17,10 @@ public class ManejadorRed : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    public void OnConnectedToMaster()
+    public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
-        informacion.text = "Conectando al servido";
+        informacion.text = "Conectando al servidor";
         print(informacion.text);
         Debug.Log("Conectando al servidor");
     }//OnConnectedToMaster
