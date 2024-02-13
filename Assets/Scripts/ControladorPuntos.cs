@@ -14,7 +14,7 @@ public class ControladorPuntos : MonoBehaviourPunCallbacks
     //Referencia los textos de la escena
     public TMP_Text VariableLocalText;
     public TMP_Text VariableRedText;
-
+    
     //Variable para modificar en red
     public string tomarDatosRival = "0";
 
@@ -35,6 +35,41 @@ public class ControladorPuntos : MonoBehaviourPunCallbacks
         VariableRedText.text = variable; //cambia el vaor del otro jugador
     }
 
+    [PunRPC]
+    public void CompararValores()
+    {
+        hiddenVariable = int.Parse(VariableRedText.text);
+        guessVariable = int.Parse(VariableLocalText.text);
+
+        if (photonView.IsMine)
+        {
+            InfoPartida.enabled = false;
+
+            if(hiddenVariable == guessVariable)
+            {
+                InfoPartida.text = "NUMERO ADIVINADO";
+                InfoPartida.enabled = true;
+            }
+        }
+        if(!photonView.IsMine)
+        {
+            VariableRedText.enabled = false;
+
+            if(hiddenVariable < guessVariable)
+            {
+                InfoPartida.text = "La respuesta es menor";
+            }
+            if (hiddenVariable > guessVariable)
+            {
+                InfoPartida.text = "La respuesta es mayor";
+            }
+            if (hiddenVariable == guessVariable)
+            {
+                InfoPartida.text = "Has acertado!!!!";
+            }
+
+        }
+    }
     void Start()
     {
         
@@ -44,5 +79,9 @@ public class ControladorPuntos : MonoBehaviourPunCallbacks
     void Update()
     {
         
+
+
+
+
     }//Update
 }
